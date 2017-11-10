@@ -1,0 +1,136 @@
+<!--orderdetail.wxml-->
+<view class="container">
+
+
+  <!-- <block wx:for="{{logs}}" wx:for-item="log">
+    <text class="log-item">{{index + 1}}. {{log}}</text>
+  </block> -->
+  <!--上部棋牌室的基本信息-->
+  <view style="padding:0;margin:0;width:100%;">
+    <view class="chess-room">
+      <label class="title titleText">{{chessRoomDetail.shop.name}}</label>
+      <view class="star-view">
+        <image wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" style="width: 0.8rem; height: 0.8rem; "  src="../image/title-bar_collection_normal.png"></image>
+        <text class="score-text">4分</text>
+      </view>
+      <label class="addr-text">{{chessRoomDetail.shop.addr}}</label>
+      <label class="time-text">营业时间：{{timeStart}}至{{timeEnd}}</label>
+      <image class="cover-img" src="{{chessRoomDetail.shop.avatar}}"></image>
+    </view>
+    <view class="ad-view">
+      <image class="ad-img" src="../image/list_notice.png"></image>
+      <text class="ad-title">公告</text>
+      <label class="ad-content">优惠大酬宾，周一至周五每小时仅需10元，巴拉巴拉阿里巴拉巴拉。</label>
+    </view>
+    <view class="line"></view>
+    <view class="goods-title-view">
+      <text class="line-left"></text>
+      <text class="good-title">店铺商品</text>
+      <text class="line-right"></text>
+    </view>
+  </view>
+
+  <!--底部商品-->
+  <view class="goods" style="height: {{goodsH}}px;">
+    <!--左侧产品列表-->
+    <view class="menu-wrapper" style="height: {{goodsH}}px;">
+    <scroll-view scroll-y style="height: {{goodsH}}px;"   scroll-with-animation="{{animation}}">
+      <view wx:for="{{chessRoomDetail.catList}}" id="cat_{{index}}_{{item.id}}" class="menu-item {{(catHighLightIndex == index) ? 'current':''}}" bindtap="catClickFn">{{item.categoryName}}</view>
+      </scroll-view>
+    </view>
+
+    <!--右侧产品列表-->
+    <view class="foods-wrapper" style="height: {{goodsH}}px;">
+      <scroll-view scroll-y style="height: 100%;" bindscroll="goodsViewScrollFn" scroll-into-view="{{toView}}">
+      <view wx:for="{{chessRoomDetail.catList}}" class="food-grouping" id="catGood_{{item.id}}">
+        <view wx:for="{{item.goodsList}}" wx:for-item="good" class="foods-item" id="{{good.id}}">
+          <image  class="icon" src="{{good.image}}"></image>
+          <view   class="content"><text class="title">{{good.name}}</text><text class="price">¥{{good.price}}</text></view>
+          <!--加减器-->
+          <view class="cartcontrol-wrap">
+            <view class="cartcontrol">
+                <block wx:for="{{shoppingCartGoodsId}}" wx:for-item="goodId">
+                  <view bindtap="decreaseGoodToCartFn"  class="cart-decrease {{(good.id == goodId) ? '': 'hidden'}}">
+                    <image class="cart-decrease" id="decrease_{{good.id}}" src="../image/dpsp_subtract.png"></image>
+                    <view class="inner icon-remove_circle_outline"></view>
+                  </view>
+                </block>
+                <text class="cart-count">{{(shoppingCart[good.id]) ? shoppingCart[good.id]: ""}}</text>
+               <image src="../image/dpsp_add.png" bindtap="touchOnGoods" id="add_{{good.id}}" class="cart-add icon-add_circle"></image>
+            </view>  
+          </view>
+        </view>        
+      </view>
+      </scroll-view>
+    </view> 
+    
+  </view>
+
+  <!--选择商品区域-->
+  <view>
+    <view class="shopcart">
+      <view class="content">
+        <view class="content-left" bindtap="showShopCartFn">
+          <view class="logo-wrapper">
+            <image class="logo" src="../image/{{(totalNum > 0) ? 'icon_selected': 'icon_normal'}}.png" style="background-image:url(../image/{{(totalNum > 0) ? 'icon_selected': 'icon_normal'}}.png)">
+              <i class="icon-shopping_cart"></i>
+            </image>
+            <view class="num" wx:if="{{totalNum}}">{{totalNum}}</view>
+          </view>
+          <view class="price {{(totalPay > 0)? 'highlight':''}}">￥{{totalPay}}</view>
+        </view>
+        <view class="content-right">
+          <view bindtap="goPayFn" class="pay {{(totalPay > 0) ? 'payClass':''}}">去结算
+          </view>
+        </view>
+      </view>
+
+      
+      <view class="shopcart-list {{(showShopCart && (totalPay > 0))?'':'hidden'}}">
+        <view class="list-header">
+          <view class="title"><text class="title-line">已选商品</text> <text class="empty" bindtap="clearShopCartFn">清空</text></view>
+        </view>
+        <scroll-view scroll-y style="max-height: 257px;">
+        <view class="list-content" >
+          
+            <view>
+              <view class="food" wx:for="{{chooseGoodArr}}" wx:for-item="good">
+                <view class="name">{{good.name}}</view>
+                <view class="price">
+                  <view>￥{{good.price}}</view>
+                </view>
+
+                <view class="cartcontrol-wrapper">
+                    <view class="cartcontrol">
+                        <view bindtap="decreaseGoodToCartFn"  class="cart-decrease">
+                            <image id="decrease_{{good.id}}" class="cart-decrease" src="../image/dpsp_subtract.png"></image>
+                            <view class="inner icon-remove_circle_outline"></view>
+                        </view>
+                        <text class="cart-count">{{(shoppingCart[good.id]) ? shoppingCart[good.id]: ""}}</text>
+                        <image src="../image/dpsp_add.png" bindtap="addGoodToCartFn" id="add_{{good.id}}" class="cart-add icon-add_circle"></image>
+                        
+                    </view>  
+                  </view>
+              </view>
+            </view>
+          
+        </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  
+  <!--小球的实现-->
+
+
+  <view class="good_box" hidden="{{hide_good_box}}"  style="left: {{bus_x}}px; top: {{bus_y}}px;">
+  </view>
+
+
+  
+  <view style="height:86px;"></view>
+  
+</view>
+<view bindtap="showShopCartFn" class="cover  {{(showShopCart && (totalPay > 0))?'':'hidden'}}"></view>
+
+  

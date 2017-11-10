@@ -1,0 +1,432 @@
+.hidden{
+  display: none !important;
+}
+.chess-room{
+  height: 91px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.title{
+  width: 18.17rem;
+  display: block;
+}
+.titleText{
+  line-height: 24px;
+  font-size:22px;
+}
+.star-view{
+  height: 27px;
+}
+.score-text{
+  font-size: 12px;
+  color: #F59C3D;
+}
+.addr-text{
+  font-size: 12px;
+  color: #999;
+}
+.addr-text{
+  font-size: 12px;
+  color: #999;
+  display: block;
+}
+.time-text{
+  font-size: 12px;
+  color: #999;
+}
+.star-bg{
+  display: inline-block;
+  margin: 0 2px;
+}
+.cover-img{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 90px;
+  width: 90px;
+  border-radius: 10px;
+}
+.line{
+  width: 100%;
+  background: #eee;
+  height: 10px;
+}
+.ad-view{
+  height: 50px;
+  padding: 8px 10px;
+  padding-left: 66px;
+  position: relative;
+}
+.ad-title{
+  position: absolute;
+  left: 0;
+  top: 36px;
+  width:66px;
+  font-size: 0.7rem;
+  color: #0085CF;
+  text-align: center;
+}
+.ad-content{
+  font-size: 12px;
+  color: #666;
+  line-height: 18px;
+}
+.ad-img{
+  position: absolute;
+  left:22px;
+  top:15px;
+  width:20px;
+  height:20px;
+}
+.goods-title-view{
+  border-bottom: 1px solid #eee;
+  padding: 15px 10%;
+  text-align: center;
+  height: 26px;
+}
+.line-left,.line-right{
+  display: inline-block;
+  height: 1px;
+  border-bottom: 1px solid #ADADAD;
+  width: 30%;
+  margin-bottom: 4px;
+}
+.good-title{
+  padding: 0 15px;
+  color: #333;
+}
+.goods{
+    display: flex;
+    width: 100%;
+    /* overflow: hidden; */
+    /* height: 100%; */
+    /* padding-bottom: 35px; */
+}
+.menu-wrapper{
+    flex: 0 0 100px;
+    width: 100px;
+    background: #f3f5f7;
+    /* height: 100%; */
+    /* padding-bottom: 50px; */
+}
+.menu-item{
+    display: table;
+    height: 54px;
+    width: 80px;
+    padding: 0 12px;
+    line-height: 54px;
+    color:#999;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
+.menu-item.current{
+  color:#333;
+  background: #fff;
+}
+.foods-wrapper{
+  flex: 1;
+}
+.foods-item{
+  display:flex;
+  position:relative;
+  margin:0 18px;
+  padding-bottom:18px;
+  height:60px;
+  border-bottom:1px solid rgba(248,248,248,1);
+  padding-top:18px;
+}
+.food-grouping:last-child .foods-item:last-child{
+  border: none;
+  margin-bottom: 0;
+}
+.foods-item .icon{ 
+    display: inline-block;
+    width: 60px;
+    height: 60px;     
+    flex: 0 0 57px;
+    margin-right: 10px;
+}
+.foods-item .title{
+  display: block;
+  color: #2c2c2c;
+  font-size: 0.8rem;
+}
+.foods-item .content{
+  position: relative;
+  width: 20px;
+}
+.foods-item .price{
+  font-size: 0.8rem;
+  color: #FF5035;
+  position: absolute;
+  bottom: 0;
+}
+.cartcontrol-wrap{
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+}
+.cartcontrol{
+  font-size: 0;
+}
+.cart-decrease{
+  display:inline-block;
+  padding:6px;
+  opacity:1;
+  transform:translate3d(0, 0, 0);
+  width:25px;
+  height:25px;
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center;
+  padding:0;
+  float: left;
+}
+.cart-add{
+  width:25px;
+  height:25px;
+  display: inline-block;
+  padding: 6px;
+  padding:0;
+  line-height: 24px;
+  font-size: 24px;
+  color: rgb(0, 160, 220);
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center;
+}
+.inner{
+  display: inline-block;
+  line-height: 24px;
+  font-size: 24px;
+  color: rgb(0, 160, 220);
+  transition: all 0.4s linear;
+  transform: rotate(0);
+}
+.inner.move-enter-active, .inner.move-leave-active{
+  transition: all 0.4s linear;
+}
+.inner .move-enter, .inner.move-leave-active{
+  opacity: 0;
+  transform: translate3d(24px, 0, 0);
+}
+.inner{
+  transform: rotate(180deg);
+}
+    
+.icon-remove_circle_outline{
+
+}
+.cart-count{
+  display:inline-block;
+  vertical-align:top;
+  width:42px;
+  padding-top:2px;
+  line-height:24px;
+  text-align:center;
+  font-size:10px;
+  color:rgb(147, 153, 159);
+  line-height:20px;
+  float:left;
+  font-size:17px;
+}
+
+
+.icon-add_circle{
+
+}
+
+/*底部的购物车*/
+.shopcart{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 100%;
+    height: 48px;
+}
+.shopcart .content{
+    display: flex;
+    background: #141d27;
+    font-size: 0;
+    color: rgba(255, 255, 255, 0.4);
+}
+.shopcart .content .content-left{
+  flex: 1
+}
+.shopcart .logo-wrapper{
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: -10px;
+  margin: 0 12px;
+  padding: 6px;
+  width: 56px;
+  height: 56px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #141d27;
+}
+.shopcart .logo{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  text-align: center;
+  background: #2b343c;
+  background-size: 100% 100%;
+}
+.shopcart .logo.highlight{
+  background: rgb(0, 160, 220);
+}
+.shopcart{
+  line-height: 44px;
+  font-size: 24px;
+  color: #80858a;
+}
+.shopcart.highlight{
+  color: #fff;
+}
+.shopcart .num{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 16px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  background: rgb(240, 20, 20);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+.shopcart .price{
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 12px;
+  line-height: 24px;
+  padding-right: 12px;
+  box-sizing: border-box;
+  /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
+  font-size: 16px;
+  font-weight: 700;
+}
+.shopcart .price.highlight{
+  color: #fff;
+}
+.shopcart .content-right{
+  flex: 0 0 105px;
+  width: 105px;
+}
+.content-right .pay{
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  background: #2b333b;
+}
+.content-right .pay.enough{
+  background: #00b43c;
+  color: #fff;
+}
+
+/*点击购物车弹出来的购买物品的列表*/
+.shopcart-list{
+  position:absolute;
+  left:0;
+  bottom:49px;
+  z-index:-1;
+  width:100%;
+  background: #fff;
+}
+.food{
+  border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+}
+.list-header{
+  height: 40px;
+  line-height: 40px;
+  padding: 0 18px;
+  background: #f3f5f7;
+  border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+}
+.list-header .title{
+  float: left;
+  font-size: 14px;
+  color: rgb(7, 17, 27);
+  width: 100%;
+}
+.list-header .title .title-line{
+  border-left:3px solid #0085CF;
+  margin:10px 0;
+  height:20px;
+  line-height:20px;
+  padding-left:6px;
+}
+.list-header .empty{
+  float: right;
+  font-size: 12px;
+  color: #666;
+}
+.list-content{
+  padding: 0 18px;
+  overflow: hidden;
+  background: #fff;
+}
+.list-content .food{
+  position: relative;
+  padding: 12px 0;
+}
+
+.list-content .name{
+  line-height: 24px;
+  font-size: 14px;
+  color: rgb(7, 17, 27);
+}
+
+.list-content .price{
+  position: absolute;
+  right: 90px;
+  bottom: 12px;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #666;
+}
+ .list-content .cartcontrol-wrapper{
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+}
+ 
+.content-right .pay.payClass{
+  color: #fff;
+  background: rgba(31,166,241,1);
+}
+
+.cover{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity:0.5;
+}
+
+/*抛物线动画*/
+.good_box{
+  width: 18px;
+  height: 18px;
+  position: fixed;
+  border-radius: 50%;
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  z-index: +99;
+  background:rgba(0,133,207,1);
+}
