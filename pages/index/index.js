@@ -361,44 +361,44 @@ Page({
       systemInfo: systemInfo,
       goodsH: systemInfo.windowHeight - 245 - 48
     });
-    console.log(mechine)
 
-          _that.setData({
-            chessRoomDetail: aa//res.data.Object
-          });
 
-          let timeStart = util.getLocalTime(_that.data.chessRoomDetail.shop.timeStart)
-          let timeEnd = util.getLocalTime(_that.data.chessRoomDetail.shop.timeEnd)
+    _that.setData({
+      chessRoomDetail: aa//res.data.Object
+    });
 
-          //初始化右侧商品一开始滚动的位置
-          _that.setData({
-            toView: _that.GOODVIEWID + _that.data.chessRoomDetail.catList[0].id,
-            timeStart: timeStart,
-            timeEnd: timeEnd
-          });
+    let timeStart = util.getLocalTime(_that.data.chessRoomDetail.shop.timeStart)
+    let timeEnd = util.getLocalTime(_that.data.chessRoomDetail.shop.timeEnd)
 
-          //存下项目下的产品个数
-          for (let i = 0; i < _that.data.chessRoomDetail.catList.length; i++) {
-            _that.data.goodsNumArr.push(_that.data.chessRoomDetail.catList[i].goodsList.length);
-            let goods = _that.data.chessRoomDetail.catList[i].goodsList;
-            if (goods.length > 0) {
-              for (let j = 0; j < goods.length; j++) {
-                //console.log(goods[j].id)
-                _that.data.goodMap[goods[j].id] = goods[j];
-              }
-            }
+    //初始化右侧商品一开始滚动的位置
+    _that.setData({
+      toView: _that.GOODVIEWID + _that.data.chessRoomDetail.catList[0].id,
+      timeStart: timeStart,
+      timeEnd: timeEnd
+    });
 
-          }
-          let HArr = [];
-          for (let j = 0; j < _that.data.goodsNumArr.length; j++) {
-            if (j == 0) {
-              HArr.push(0);
-            } else {
-              HArr.push(_that.data.goodsNumArr[j] * 98 + HArr[j - 1]);
-            }
-          }
+    //存下项目下的产品个数
+    for (let i = 0; i < _that.data.chessRoomDetail.catList.length; i++) {
+      _that.data.goodsNumArr.push(_that.data.chessRoomDetail.catList[i].goodsList.length);
+      let goods = _that.data.chessRoomDetail.catList[i].goodsList;
+      if (goods.length > 0) {
+        for (let j = 0; j < goods.length; j++) {
+          //console.log(goods[j].id)
+          _that.data.goodMap[goods[j].id] = goods[j];
+        }
+      }
 
-          _that.data.goodsNumArr = HArr;
+    }
+    let HArr = [];
+    for (let j = 0; j < _that.data.goodsNumArr.length; j++) {
+      if (j == 0) {
+        HArr.push(0);
+      } else {
+        HArr.push(_that.data.goodsNumArr[j] * 98 + HArr[j - 1]);
+      }
+    }
+
+    _that.data.goodsNumArr = HArr;
 
   },
   onShareAppMessage: function () {
@@ -410,7 +410,6 @@ Page({
   },
   //右侧列表滚动事件
   goodsViewScrollFn: function (e) {
-    //console.log(e)
     this.getIndexFromHArr(e.detail.scrollTop)
   },
   //传入滚动的值，去让右侧的类型也跟着变动
@@ -424,10 +423,6 @@ Page({
             catHighLightIndex: j
           });
         }
-        // let hlIndex = (this.data.fromClickScroll) ? j+1:j;
-        // this.setData({
-        //   catHighLightIndex: hlIndex
-        // });
       }
     }
     this.setData({
@@ -504,8 +499,6 @@ Page({
       topPoint['x'] = (this.busPos['x'] - this.finger['x']) / 2 + this.finger['x'];
     }
 
-    //topPoint['x'] = this.busPos['x'] + 80
-    //this.linePos = app.bezier([this.finger, topPoint, this.busPos], 30);
     this.linePos = app.bezier([this.busPos, topPoint, this.finger], 30);
     this.startAnimation(e);
   },
@@ -521,19 +514,21 @@ Page({
     var len = bezier_points.length;
     index = len
     this.timer = setInterval(function () {
-      index--;
-      that.setData({
-        bus_x: bezier_points[index]['x'],
-        bus_y: bezier_points[index]['y']
-      })
-      if (index < 1) {
-        clearInterval(that.timer);
-        that.addGoodToCartFn(e);
+      for(let i = index - 1; i > -1; i--) {
         that.setData({
-          hide_good_box: true
+          bus_x: bezier_points[i]['x'],
+          bus_y: bezier_points[i]['y']
         })
+
+        if (i < 1) {
+          clearInterval(that.timer);
+          that.addGoodToCartFn(e);
+          that.setData({
+            hide_good_box: true
+          })
+        }
       }
-    }, 22);
+    }, 25);
   },
   //移除商品的事件
   decreaseGoodToCartFn: function (e) {
